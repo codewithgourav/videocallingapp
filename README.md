@@ -34,3 +34,21 @@ Run `ng e2e` to execute the end-to-end tests via a platform of your choice. To u
 ## Further help
 
 To get more help on the Angular CLI use `ng help` or go check out the [Angular CLI Overview and Command Reference](https://angular.io/cli) page.
+
+App Preview 
+
+Login
+<img width="442" alt="login" src="https://github.com/codewithgourav/videocallingapp/assets/95848686/3c7f9ba6-625d-4620-9974-d42ed2516800">
+
+Start meeting
+Step 1
+<img width="947" alt="image" src="https://github.com/codewithgourav/videocallingapp/assets/95848686/bdb29a58-3fa5-4457-acd0-61165be757c1">
+
+Step 2
+<img width="948" alt="image" src="https://github.com/codewithgourav/videocallingapp/assets/95848686/39baf4a4-1955-4729-9b64-0090772bba4b">
+
+Identity Verification
+<img width="949" alt="image" src="https://github.com/codewithgourav/videocallingapp/assets/95848686/d57c36ed-0d71-49f4-b243-99c7c3a43278">
+
+
+
