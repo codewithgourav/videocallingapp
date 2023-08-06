@@ -1,6 +1,15 @@
 # VideoApp
 
-This project was generated with [Angular CLI](https://github.com/angular/angular-cli) version 13.3.4.
+This is a project in angular that uses Peer JS Equipped with nothing but an ID, a peer can create a P2P data or media stream connection to a remote peer.
+
+The App Provides the following features.
+1. Create call.
+2. End call.
+3. Mute call.
+4. Turn off webcam.
+5. Record a call.
+6. Indetity verification before starting a call.
+7. Webcam Preview.
 
 ## Development server
 
