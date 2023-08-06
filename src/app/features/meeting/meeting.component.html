@@ -1,0 +1,138 @@
+<div class="main_container" *ngIf="!indentification" style="margin-top: 200px;">
+    <div class="meeting_desk">
+        <div style="width: 42%;">
+            <h2>Start a meeting</h2>
+            <div class="start_meet">
+                <button class="btn" (click)="startmeeting()" id="start">Start</button>
+
+                <div *ngIf="showcode">
+                    <h3>Your Meeting ID</h3>
+                    <p id="id">
+                        {{mypeerid}}
+                        <span class="action">
+                            <i class="pi pi-clone" id="clone" (click)="copyLink(mypeerid)"></i>
+                        </span>
+                        <span class="action">
+                            <i class="pi pi-undo" (click)="reloadCode()"></i>
+                        </span>
+                    </p>
+                </div>
+            </div>
+        </div>
+        <div style="width: 42%;">
+            <h2>Join a meeting</h2>
+            <div class="start_meet1">
+                <div>
+                    <input type="text" class="meet_code" [(ngModel)]="anotherId">
+                    <br>
+                    <div class="cl_btns">
+                        <button class="btn" (click)="joinCall()">Join</button>
+                        <button class="btn" (click)="toggleWebCam()" id="prev">Preview</button>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+
+<div style="position: fixed;top: 1px;right: 0;">
+    <webcam class="preview" [height]="250" [width]="250" [trigger]="triggerObservable" *ngIf="showWebcam"
+        [allowCameraSwitch]="allowCameraSwitch" [switchCamera]="nextWebcamObservable" [videoOptions]="videoOptions"
+        [imageQuality]="1" (cameraSwitched)="cameraWasSwitched($event)" (initError)="handleInitError($event)">
+    </webcam>
+</div>
+
+<p-dialog [(visible)]="displaymeeting" [maximizable]="true" [style]="{width:'600px'}" [draggable]="true"
+    [resizable]="false" [modal]="false" [position]="'top'">
+    <h1 class="waiting" id="text">Waiting For Others To Join</h1>
+    <div class="two_vids">
+        <div class="call" id="myvideo2"></div>
+        <webcam class="preview1" [height]="100" [width]="100" [trigger]="triggerObservable" *ngIf="showWebcam1"
+            [allowCameraSwitch]="allowCameraSwitch" [switchCamera]="nextWebcamObservable" [videoOptions]="videoOptions"
+            [imageQuality]="1" (cameraSwitched)="cameraWasSwitched($event)" (initError)="handleInitError($event)">
+        </webcam>
+        <div id="timerDisplay" *ngIf="timer">Timer: {{timerValue}}</div>
+    </div>
+    <div class="call_button" *ngIf="showactionbutton">
+        <button class="btn1" (click)="turnOffCamera()" [style.background-color]="buttonColor">
+            <fa-icon [icon]="faVideo"></fa-icon>
+        </button>
+        <button class="btn2" (click)="mute()" [style.background-color]="buttonColor1">
+            <fa-icon [icon]="faMicrophone"></fa-icon>
+        </button>
+        <button class="btn3" (click)="endCall()">
+            <fa-icon [icon]="faPhoneSlash"></fa-icon>
+        </button>
+        <button class="btn4" (click)="startCallRecording()" id="record">
+            Start Recording
+        </button>
+    </div>
+</p-dialog>
+
+<video id="videoStream" controls style="visibility: hidden;"></video>
+
+<div class="newDiv" *ngIf="indentification">
+    <div id="errorLabel" class="alert alert-success text-center" *ngIf="idMsg">
+        {{msg}}
+    </div>
+    <div id="errorLabel" class="alert alert-danger text-center" *ngIf="errMsg">
+        {{msg}}
+    </div>
+    <div id="errorLabel" class="alert alert-success text-center" *ngIf="showSelfieMsg">
+        {{selfieMsg}}
+    </div>
+
+    <h2 class="headingText text-center" style="font-weight: 800;">Identity Verification Check</h2>
+
+    <div class="idAnalyzer">
+        <div class="newdiv">
+            <div class="labels">
+                <div class="text-center">
+                    <h4 class="idLabel text-center my-4">
+                        Upload Front of Driver License/ State ID/ Passport
+                    </h4>
+
+                    <label for="file-upload" class="btnn btn-active buttonAndIcon">
+                        <fa-icon [icon]="faCloudUploadAlt"></fa-icon>
+                        <p style="margin-bottom: 0;">Upload</p>
+                    </label>
+                    <input type="file" class="uploadFile text-center" name="file" accept="image" value="file"
+                    (change)="getFile1($event)" id="file-upload" placeholder="Choose File"/>
+                    <p class="filename" *ngIf="filename">{{file1Name}}</p>
+                </div>
+
+            </div>
+            <div class="fileDiv" *ngIf="togCam">
+                <h4 class="selfieLabel text-center my-4">Take a Selfie</h4>
+                <p class="text-center filename1" *ngIf="showSelfie">{{selfieName}}</p>
+                <div class="text-center">
+                    <button class="btnn btn-active buttonAndIcon mb-3" *ngIf="showWebcamButton" [disabled]="disableWebcam"
+                    (click)="toggleWebcamera()">
+                        <fa-icon [icon]="faVideo"></fa-icon>
+                        <p style="margin-bottom: 0;">Turn on Webcam</p>
+                    </button>
+
+                    <button class="btnn btn-active buttonAndIcon mb-3 takeSnapshot" *ngIf="showButton" 
+                    (click)="triggerSnapshot()">
+                        <fa-icon [icon]="faCamera"></fa-icon>
+                        Take A Snapshot
+                    </button>
+                </div>
+                <div class="webcam text-center">
+                    <div class="webcam-wrapper" (window:resize)="onResize($event)">
+                        <webcam [height]="500" [width]="500" [trigger]="triggerObservable" *ngIf="showWebcamera"
+                            (imageCapture)="handleImage($event)" [imageQuality]="1"(initError)="handleInitError($event)"
+                            id="webcam">
+                        </webcam>
+                    </div>
+                </div>
+            </div>
+        </div>
+        <div class="text-center" *ngIf="togverify">
+            <button class="btnn btnuploadFiles-active buttonAndIcon" [disabled]="disableSubmit"
+            (click)="uploadFiles()">Verify
+                <span *ngIf="loading" class="spin" role="status" aria-hidden="true"></span>
+            </button>
+        </div>
+    </div>
+</div>

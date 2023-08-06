@@ -1,0 +1,21 @@
+<div class="login_form">
+    <h1>Welcome to talK</h1>
+    <form class="login-form">
+        <div class="form_field">
+            <mat-form-field class="login-full-width" appearance="outline">
+                <mat-label>Name</mat-label>
+                <input matInput type="email" name="mail" [(ngModel)]="userName">
+            </mat-form-field>
+        </div>
+        <div class="form_field">
+            <mat-form-field class="login-full-width" appearance="outline">
+                <mat-label>Password</mat-label>
+                <input matInput type="password" name="password" [(ngModel)]="password">
+            </mat-form-field>
+        </div>
+
+        <div class="form_field">
+            <button class="login" (click)="getCode()">Login</button>
+        </div>
+    </form>
+</div>

@@ -1,0 +1,33 @@
+<div class="container" style="margin-top: 20px;">
+    <div class="videoContainer">
+        <div class="call" id="remote-video"></div>
+    </div>
+    <p-dialog [(visible)]="displaymeeting" [maximizable]="true" [style]="{width:'600px'}" [draggable]="true"
+        [resizable]="false" [modal]="false" [position]="'top'">
+        <h1 class="waiting" id="text">Waiting For Others To Join</h1>
+        <div class="two_vids">
+            <div class="call" id="myvideo2"></div>
+            <webcam class="preview1" [height]="100" [width]="100" [trigger]="triggerObservable" *ngIf="showWebcam1"
+                [allowCameraSwitch]="allowCameraSwitch" [switchCamera]="nextWebcamObservable"
+                [videoOptions]="videoOptions" [imageQuality]="1" (cameraSwitched)="cameraWasSwitched($event)"
+                (initError)="handleInitError($event)">
+            </webcam>
+        </div>
+        <div class="call_button" *ngIf="showactionbutton">
+            <button class="btn1" (click)="turnOffCamera()" [style.background-color]="buttonColor">
+                <fa-icon [icon]="faVideo" *ngIf="!isCameraOn"></fa-icon>
+                <fa-icon [icon]="faVideoSlash" *ngIf="isCameraOn"></fa-icon>
+            </button>
+            <button class="btn2" (click)="mute()" [style.background-color]="buttonColor1">
+                <fa-icon [icon]="faMicrophone" *ngIf="!isCameraOn1"></fa-icon>
+                <fa-icon [icon]="faMicrophoneSlash" *ngIf="isCameraOn1"></fa-icon>
+            </button>
+            <button class="btn3" (click)="endCall()">
+                <fa-icon [icon]="faPhoneSlash"></fa-icon>
+            </button>
+            <button class="btn4" (click)="startCallRecording()" id="record">
+                Start Recording
+            </button>
+        </div>
+    </p-dialog>
+</div>

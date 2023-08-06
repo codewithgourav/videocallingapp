@@ -1,0 +1,40 @@
+h1 {
+    font-family: 'Raleway', sans-serif;
+    font-size: 40px;
+    font-weight: bold;
+    color: #00236d;
+    text-align: center;
+    margin-bottom: 50px;
+    margin-top: 50px;
+}
+
+.login_form {
+    width: 500px;
+    margin: 0 auto;
+}
+
+.login-full-width {
+    width: 80%;
+}
+
+.form_field {
+    text-align: center;
+}
+
+.login {
+    width: 80% !important;
+    height: 50px;
+    background-color: #00236d;
+    border-radius: .5rem;
+    font-size: 15px;
+    transition: .5s ease-in-out;
+    border: none;
+    color: #fff;
+    font-family: 'Raleway', sans-serif;
+    cursor: pointer;
+}
+
+.login:hover {
+    background-color: #00aeef;
+    transform: scale(1.1);
+}
